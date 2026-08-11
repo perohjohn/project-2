@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include<algorithm>
 using namespace std;
 
 class BigInt {
@@ -33,43 +34,63 @@ public:
     BigInt(const string& str) {
         // TODO: Implement this constructor
     }
-
+///////////////////////////////////////////////////////
     // Copy constructor
     BigInt(const BigInt& other) {
-        // TODO: Implement this constructor
+       number=other.number;
+       isNegative=other.isNegative; 
     }
 
     // Destructor
-    ~BigInt() {
-        // TODO: Implement if needed
+    ~BigInt() { 
     }
 
     // Assignment operator
     BigInt& operator=(const BigInt& other) {
-        // TODO: Implement this operator
+        if (this != &other){
+            number=other.number;
+            isNegative=other.isNegative;
+        }
         return *this;
     }
 
     // Unary negation operator (-x)
     BigInt operator-() const {
-        BigInt result;
-        // TODO: Implement negation logic
+        BigInt result = *this;
+        if(this->number!="0"){
+            result.isNegative = !this->isNegative;
+        }
         return result;
     }
 
     // Unary plus operator (+x)
     BigInt operator+() const {
-        BigInt result;
-        // TODO: Implement this operator
-        return result;
+        return *this;
     }
 
     // Addition assignment operator (x += y)
     BigInt& operator+=(const BigInt& other) {
-        // TODO: Implement this operator
-        return *this;
+    if (this->isNegative == other.isNegative) {
+        string result = "";
+        int carry = 0;
+        int i = this->number.length() - 1;
+        int j = other.number.length() - 1;
+        while (i >= 0 || j >= 0 || carry > 0) {
+            int sum = carry;
+            if (i >= 0) sum += this->number[i--] - '0';
+            if (j >= 0) sum += other.number[j--] - '0';
+            carry = sum / 10;
+            result += (sum % 10) + '0';
+        }
+        reverse(result.begin(), result.end());
+        this->number = result;
+       } 
+    else {
+        *this = *this - (-other);
     }
-
+    return *this;
+}
+///////////////////////////////////////////////////////////
     // Subtraction assignment operator (x -= y)
     BigInt& operator-=(const BigInt& other) {
         // TODO: Implement this operator
