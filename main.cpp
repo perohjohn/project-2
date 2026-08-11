@@ -34,7 +34,6 @@ public:
     BigInt(const string& str) {
         // TODO: Implement this constructor
     }
-///////////////////////////////////////////////////////
     // Copy constructor
     BigInt(const BigInt& other) {
        number=other.number;
@@ -90,7 +89,6 @@ public:
     }
     return *this;
 }
-///////////////////////////////////////////////////////////
     // Subtraction assignment operator (x -= y)
     BigInt& operator-=(const BigInt& other) {
         // TODO: Implement this operator
