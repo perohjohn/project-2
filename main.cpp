@@ -213,6 +213,7 @@ public:
     BigInt& operator++() //(18)
     {
         // TODO: Implement this operator
+        *this += BigInt(1);
         return *this;
     }
 
@@ -220,9 +221,8 @@ public:
     BigInt operator++(int) //(19)
     {
         BigInt temp = *this;
-
         // TODO: Implement this operator
-
+        ++(*this);
         return temp;
     }
 
@@ -230,6 +230,7 @@ public:
     BigInt& operator--() //(20)
     {
         // TODO: Implement this operator
+        *this -= BigInt(1);
         return *this;
     }
 
@@ -237,9 +238,8 @@ public:
     BigInt operator--(int)//(21)
     {
         BigInt temp = *this;
-
         // TODO: Implement this operator
-
+        --(*this);
         return temp;
     }
 
@@ -247,7 +247,9 @@ public:
     string toString() const //(22)
     {
         // TODO: Implement this function
-        return "";
+        if (isNegative && number != "0")
+            return "-" + number;
+        return number;
     }
 
     // Output stream operator
