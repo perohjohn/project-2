@@ -178,40 +178,37 @@ BigInt operator%(BigInt lhs, const BigInt& rhs) { //(27)
     return result;
 }
 
-// Equality comparison operator (x == y)
-bool operator==(const BigInt& lhs, const BigInt& rhs) { //(28)
-    // TODO: Implement this operator
-    return false;
+bool operator==(const BigInt& lhs, const BigInt& rhs) {
+    if (lhs.isNegative != rhs.isNegative) return false;
+    return lhs.number == rhs.number;
 }
 
-// Inequality comparison operator (x != y)
-bool operator!=(const BigInt& lhs, const BigInt& rhs) { //(29)
-    // TODO: Implement this operator
-    return false;
+bool operator!=(const BigInt& lhs, const BigInt& rhs) {
+    return !(lhs == rhs);
 }
 
-// Less-than comparison operator (x < y) 
-bool operator<(const BigInt& lhs, const BigInt& rhs) { //(30)
-    // TODO: Implement this operator
-    return false;
+bool operator<(const BigInt& lhs, const BigInt& rhs) {
+    if (lhs.isNegative != rhs.isNegative) {
+        return lhs.isNegative;
+    }
+    int cmp = lhs.compareMagnitude(rhs);
+    if (!lhs.isNegative) {
+        return cmp == -1;
+    } else {
+        return cmp == 1;
+    }
 }
 
-// Less-than-or-equal comparison operator (x <= y)
-bool operator<=(const BigInt& lhs, const BigInt& rhs) { //(31)
-    // TODO: Implement this operator
-    return false;
+bool operator<=(const BigInt& lhs, const BigInt& rhs) {
+    return (lhs < rhs) || (lhs == rhs);
 }
 
-// Greater-than comparison operator (x > y)
-bool operator>(const BigInt& lhs, const BigInt& rhs) { //(32)
-    // TODO: Implement this operator
-    return false;
+bool operator>(const BigInt& lhs, const BigInt& rhs) {
+    return !(lhs <= rhs);
 }
 
-// Greater-than-or-equal comparison operator (x >= y)
-bool operator>=(const BigInt& lhs, const BigInt& rhs) { //(33)
-    // TODO: Implement this operator
-    return false;
+bool operator>=(const BigInt& lhs, const BigInt& rhs) {
+    return !(lhs < rhs);
 }
 
 int main() {
